@@ -20,8 +20,8 @@ const appConfig = {
                 throw "Fail"
             }
         } catch {
-            window.speechSynthesis.addEventListener("voiceschanged", () => this.voices = window.speechSynthesis.getVoices())
-            window.speechSynthesis.addEventListener("voiceschanged", () => this.voice = this.voices[0])
+            window.speechSynthesis.addEventListener("voiceschanged", () => this.voices = window.speechSynthesis.getVoices(), { once: true })
+            window.speechSynthesis.addEventListener("voiceschanged", () => this.voice = this.voices[0], { once: true })
         }
     },
     methods: {
