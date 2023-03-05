@@ -45,8 +45,6 @@ const appConfig = {
             utterance.voice = this.voice
             utterance.lang = this.voice.lang
 
-            window.speechSynthesis.voice = this.voice
-            window.speechSynthesis.lang = this.voice.lang
             window.speechSynthesis.speak(utterance)
         },
         stop() {
