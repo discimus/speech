@@ -36,7 +36,11 @@ const appConfig = {
                 console.log(e)
             }
             
-            const utterance = new SpeechSynthesisUtterance(this.speechContent.replace(/\n/g, ""))
+            const content = this.speechContent
+                .replaceAll("\r", " ")
+                .replaceAll("\n", " ")
+                
+            const utterance = new SpeechSynthesisUtterance(content)
 
             utterance.voice = this.voice
             utterance.lang = this.voice.lang
