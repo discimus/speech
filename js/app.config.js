@@ -12,15 +12,19 @@ const appConfig = {
             this.buttonSpeechTextContent = "Speech"
         }
 
+        function isValidVoice(voice, targets) {
+            return targets.some(t => String(voice.name).toUpperCase().split(" ").includes(t))
+        }
+
         try {
-            this.voices = window.speechSynthesis.getVoices()
-            this.voice = this.voices[0]
+            this.voices = window.speechSynthesis.getVoices().filter(t => isValidVoice(t, ["PORTUGUESE", "ENGLISH"]))
+            this.voice = this.voices.filter(t => isValidVoice(t, ["PORTUGUESE", "ENGLISH"]))[0]
 
             if (this.voice == undefined) {
                 throw "Fail"
             }
         } catch {
-            window.speechSynthesis.addEventListener("voiceschanged", () => this.voices = window.speechSynthesis.getVoices(), { once: true })
+            window.speechSynthesis.addEventListener("voiceschanged", () => this.voices = window.speechSynthesis.getVoices().filter(t => isValidVoice(t, ["PORTUGUESE", "ENGLISH"])), { once: true })
             window.speechSynthesis.addEventListener("voiceschanged", () => this.voice = this.voices[0], { once: true })
         }
     },
