@@ -14,10 +14,16 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <div id="app">
         <div class="container flex flex-col gap-3 p-3">
-            <div>
+            <div class="flex flex-row gap-3">
                 <select v-model="voice" name="select-voice" id="select-voice">
                     <option v-for="voice in voices" :value="voice" v-html="voice.name"></option>
                 </select>
+                <div class="flex justify-baseline">
+                    <input type="range" min="0.5" max="2" step="0.1" v-model="speed" name="speed" id="speed">
+                    <label for="speed">
+                        <span>Speed: <b v-html="speed"></b></span>
+                    </label>
+                </div>
             </div>
             <textarea v-model="speechContent" cols="30" rows="10"></textarea>
             <button @click="speech" v-html="buttonSpeechTextContent"></button>

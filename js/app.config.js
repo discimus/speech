@@ -3,6 +3,7 @@ const appConfig = {
         return {
             voices: [],
             voice: null,
+            speed: 1,
             speechContent: "",
             buttonSpeechTextContent: "Paste and speech"
         }
@@ -48,6 +49,7 @@ const appConfig = {
 
             utterance.voice = this.voice
             utterance.lang = this.voice.lang
+            utterance.rate = this.speed
 
             window.speechSynthesis.speak(utterance)
         },
