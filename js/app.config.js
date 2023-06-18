@@ -35,7 +35,7 @@ const appConfig = {
             try {
                 if (typeof(navigator.clipboard.readText) === "function") {
                     const temp = await navigator.clipboard.readText()
-                    this.speechContent = temp                
+                    this.speechContent = temp
                 }
             } catch (e) {
                 console.log(e)
@@ -43,6 +43,8 @@ const appConfig = {
             
             const content = this.speechContent
                 .replaceAll("\-\n", "")
+                .replaceAll(/\-\s+\n/g, "")
+                .replaceAll("\-\t", "")
                 .replaceAll("\r", " ")
                 .replaceAll("\n", " ")
                 
