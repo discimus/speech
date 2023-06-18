@@ -42,6 +42,7 @@ const appConfig = {
             }
             
             const content = this.speechContent
+                .replaceAll("\-\n", "")
                 .replaceAll("\r", " ")
                 .replaceAll("\n", " ")
                 
