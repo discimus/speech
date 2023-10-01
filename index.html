@@ -6,28 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speech</title>
-    <link rel="stylesheet" href="src/css/style.css?v=1695337395">
 </head>
 
-<body>
+<body class="bg-slate-300">
     <script src="dist/vuejs/unpkg.com_vue@3.3.4_dist_vue.global.js?v=1695337395"></script>
     <script src="dist/axios/cdn.jsdelivr.net_npm_axios_dist_axios.min.js?v=1695337395"></script>
-    <div id="app">
+    <script src="dist/tailwind/3.3.3"></script>
+    <div id="app" class="m-auto max-w-2xl">
         <div class="container flex flex-col gap-3 p-3">
-            <div class="flex flex-row gap-3">
-                <select v-model="voice" name="select-voice" id="select-voice">
+            <div class="flex flex-col gap-3">
+                <select class="p-2 rounded-md" v-model="voice" name="select-voice" id="select-voice">
                     <option v-for="voice in voices" :value="voice" v-html="voice.name"></option>
                 </select>
-                <div class="flex justify-baseline">
-                    <input type="range" min="0.5" max="2" step="0.1" v-model="speed" name="speed" id="speed">
-                    <label for="speed">
+                <div class="inline-flex justify-baseline align-baseline gap-3">
+                    <input class="grow" type="range" min="0.5" max="2" step="0.1" v-model="speed" name="speed" id="speed">
+                    <label class="whitespace-nowrap w-20" for="speed">
                         <span>Speed: <b v-html="speed"></b></span>
                     </label>
                 </div>
             </div>
-            <textarea v-model="speechContent" cols="30" rows="10"></textarea>
-            <button @click="speech" v-html="buttonSpeechTextContent"></button>
-            <button @click="stop">Stop</button>
+            <textarea class="p-2 rounded-md" v-model="speechContent" cols="30" rows="10"></textarea>
+            <a href="#_" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none" data-rounded="rounded-md" data-primary="blue-600" data-primary-reset="{}" @click="speech">
+                <span v-html="buttonSpeechTextContent">Speech</span>
+            </a>
+            <a href="#_" class="inline-flex items-center justify-center px-6 py-3 font-medium text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600" @click="stop">
+                <span>Stop</span>
+            </a>
         </div>
     </div>
     <script src="src/js/app.config.js?v=1695337395"></script>
