@@ -5,7 +5,8 @@ const appConfig = {
             voice: null,
             speed: 1,
             speechContent: "",
-            buttonSpeechTextContent: "Paste and speech"
+            buttonSpeechTextContent: "Paste and speech",
+            statusMessage: ""
         }
     },
     mounted() {
@@ -54,7 +55,14 @@ const appConfig = {
             utterance.lang = this.voice.lang
             utterance.rate = this.speed
 
+            this.statusMessage = "On"
+
+            const self = this
+
+            utterance.onend = () => self.statusMessage = ""
+
             window.speechSynthesis.speak(utterance)
+            window.speechSynthesis.addEventListener("end", () => console.log(123))
         },
         stop() {
             window.speechSynthesis.cancel()
