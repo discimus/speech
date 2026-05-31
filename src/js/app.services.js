@@ -56,18 +56,20 @@ const services = {
         }
 
         function isValidVoice(voice, targets) {
-            return targets.some(t => String(voice.name).toUpperCase().split(" ").includes(t))
+            return targets.some(t => String(voice.name).toUpperCase().includes(t))
         }
 
+        let target = ["STEFFAN", "THALITA"]
+
         try {
-            self.voices = window.speechSynthesis.getVoices().filter(t => isValidVoice(t, ["PORTUGUESE", "ENGLISH"]))
-            self.voice = self.voices.filter(t => isValidVoice(t, ["PORTUGUESE", "ENGLISH"]))[0]
+            self.voices = window.speechSynthesis.getVoices().filter(t => isValidVoice(t, target))
+            self.voice = self.voices.filter(t => isValidVoice(t, target))[0]
 
             if (self.voice == undefined) {
                 throw "Fail"
             }
         } catch {
-            window.speechSynthesis.addEventListener("voiceschanged", () => self.voices = window.speechSynthesis.getVoices().filter(t => isValidVoice(t, ["PORTUGUESE", "ENGLISH"])), { once: true })
+            window.speechSynthesis.addEventListener("voiceschanged", () => self.voices = window.speechSynthesis.getVoices().filter(t => isValidVoice(t, target)), { once: true })
             window.speechSynthesis.addEventListener("voiceschanged", () => self.voice = self.voices[0], { once: true })
         }
     },
